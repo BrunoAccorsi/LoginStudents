@@ -1,4 +1,5 @@
 <?php
+require_once "controllers/UserController.php";
 include "partials/header.php";
 include "partials/navigation.php";
 
@@ -12,29 +13,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST["email"];
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
-
-    // Check if the password and confirm match
-    if($password !== $confirm_password){
-        $error =  "Password do not match";
-    } else {
-
-        // check if username already exists
-        if(user_exists($conn, $username)){
-            $error = "Username already exists, Please choose another";
-        } else {
-
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$passwordHash', '$email')";
-
-            if(mysqli_query($conn, $sql)){
-                $_SESSION['logged_in'] = true;
-                $_SESSION['username'] = $username;
-                redirect("dashboard.php");
-            }else {
-                $error =  "SOMETHING HAPPENED not data inserted, error: " . mysqli_error($conn);
-            };
-        }
+    
+    $userController = new UserController();
+    $error = $userController->register($username, $email, $password, $confirm_password);
+    
+    if(empty($error)) {
+        redirect("dashboard.php");
     }
 }
 ?>

@@ -238,7 +238,7 @@ form input {
 }
 
 nav {
-  background-color: #333;
+  background-color: #3498db;
   padding: 1rem;
   margin-bottom: 20px;
 }
@@ -257,16 +257,31 @@ nav li {
 }
 
 nav a {
-  color: white;
+  color: #f4f4f4c1;
   text-decoration: none;
   padding: 10px 15px;
   border-radius: 4px;
 }
 
 nav a:hover {
-  background-color: #555;
+  background-color: #4fa2d9;
 }
 
 nav a.active {
-  color: greenyellow;
+  color: white;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #3498db;
+  color: white;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }

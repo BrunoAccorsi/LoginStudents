@@ -13,8 +13,8 @@ class User {
         return mysqli_query($this->conn, $sql);
     }
     
-    public function getByUsername($username) {
-        $sql = "SELECT * FROM users WHERE username='$username' LIMIT 1";
+    public function getByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1";
         $result = mysqli_query($this->conn, $sql);
         if(mysqli_num_rows($result) === 1) {
             return mysqli_fetch_assoc($result);
@@ -22,8 +22,8 @@ class User {
         return null;
     }
     
-    public function exists($username) {
-        $sql = "SELECT * FROM users WHERE username='$username' LIMIT 1";
+    public function exists($email) {
+        $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1";
         $result = mysqli_query($this->conn, $sql);
         return mysqli_num_rows($result) > 0;
     }
