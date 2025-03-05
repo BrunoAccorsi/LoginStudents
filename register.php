@@ -41,26 +41,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <div class="container">
         <h2>Register</h2>
-        <p style = "color:red"> <?php echo $error; ?> </p>    
-        <form method="POST">
-            <div>
-                <label for="username">Username:</label>
-                <input id="username" placeholder="Enter your username" type="text" name="username" required>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input id="email" placeholder="Enter your email" type="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input id="password" placeholder="Enter your password" type="password" name="password" required>
-            </div>
-            <div>
-                <label for="confirm_password">Confirm Password:</label>
-                <input id="confirm_password" placeholder="Confirm your password" type="password" name="confirm_password" required>
-            </div>  
-            <button type="submit">Register</button>
-        </form>
+        <p style = "color:red"> <?php echo $error; ?> </p>
+        <div class="form-container">    
+            <form method="POST">
+                <div>
+                    <label for="username">Username:</label>
+                    <input id="username" placeholder="Enter your username" type="text" name="username" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input id="email" placeholder="Enter your email" type="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input id="password" placeholder="Enter your password" type="password" name="password" required>
+                </div>
+                <div>
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input id="confirm_password" placeholder="Confirm your password" type="password" name="confirm_password" required>
+                </div>  
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
     </div>
 
 <?php include "partials/footer.php"; ?>

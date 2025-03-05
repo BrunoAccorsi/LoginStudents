@@ -4,7 +4,7 @@ include "partials/navigation.php";
 require_once 'controllers/StudentController.php';
 
 if(!is_user_logged_in()){
-    redirect("login.php");
+    redirect("index.php");
 }
 
 $studentController = new StudentController();
@@ -24,49 +24,52 @@ if(isset($_SESSION['error'])) {
 }
 ?>
 
+<!-- Add the CSS link to the head section -->
+<link rel="stylesheet" href="css/table-styles.css">
+
 <div class="container" style="align-items: flex-start; padding: 20px;">
     <h1>Student Management Dashboard</h1>
     
     <?php if($message): ?>
-        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+        <div class="alert alert-success">
             <?php echo $message; ?>
         </div>
     <?php endif; ?>
     
     <?php if($error): ?>
-        <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+        <div class="alert alert-danger">
             <?php echo $error; ?>
         </div>
     <?php endif; ?>
     
-    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <div class="dashboard-header">
         <h2>Students List</h2>
-        <a href="add_student.php" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">
+        <a href="add_student.php" class="btn btn-primary table-action-btn">
             Add New Student
         </a>
     </div>
     
-    <table style="width: 100%; border-collapse: collapse;">
+    <table class="student-table">
         <thead>
-            <tr style="background-color: #f2f2f2;">
-                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Student ID</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Name</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Email</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Actions</th>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php if(mysqli_num_rows($students) > 0): ?>
                 <?php while($student = mysqli_fetch_assoc($students)): ?>
                     <tr>
-                        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;"><?php echo $student['student_id']; ?></td>
-                        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;"><?php echo $student['name']; ?></td>
-                        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;"><?php echo $student['email']; ?></td>
-                        <td style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">
+                        <td><?php echo $student['student_id']; ?></td>
+                        <td><?php echo $student['name']; ?></td>
+                        <td><?php echo $student['email']; ?></td>
+                        <td>
                             <form method="POST" action="delete_student.php" style="display: inline;">
                                 <input type="hidden" name="student_id" value="<?php echo $student['id']; ?>">
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this student?')" 
-                                    style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                    class="btn btn-danger table-action-btn">
                                     Delete
                                 </button>
                             </form>
@@ -75,7 +78,7 @@ if(isset($_SESSION['error'])) {
                 <?php endwhile; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="4" style="padding: 12px; text-align: center;">No students found. Add your first student!</td>
+                    <td colspan="4" style="text-align: center;">No students found. Add your first student!</td>
                 </tr>
             <?php endif; ?>
         </tbody>

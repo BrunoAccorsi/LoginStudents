@@ -4,7 +4,7 @@ include "partials/navigation.php";
 require_once 'controllers/StudentController.php';
 
 if(!is_user_logged_in()){
-    redirect("login.php");
+    redirect("index.php");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
